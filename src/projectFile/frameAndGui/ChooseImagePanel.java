@@ -45,12 +45,20 @@ public class ChooseImagePanel extends JPanel {
     public void refill_Patches_and_Infos_list(){
         pathImagesList.clear();
         imagesInfoList.clear();
+        String[] tab = new String[2];
+        String rez = "Brak opisu. \n Dodaj coś od siebie";
         for (String str: MyRAW.getrekordList()) {
-            String[] tab = str.split("&&&");
-            pathImagesList.add(tab[0]);
-            imagesInfoList.add(tab[1]);
+            if (str.contains("&&&")) {
+                tab = str.split("&&&");
+                if (tab[1].equals("")) tab[1] = rez;
+            }
+            else{
+                tab[0]=str;
+                tab[1]=rez;
+            }
+                pathImagesList.add(tab[0]);
+                imagesInfoList.add(tab[1]);
         }
-
     }
 
     private String getImageName(String str){

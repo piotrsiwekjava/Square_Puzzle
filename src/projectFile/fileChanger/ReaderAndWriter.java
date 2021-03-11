@@ -95,6 +95,7 @@ public class ReaderAndWriter {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+        reloadRecordList();
     }
     public void cleanFile(){
         try {

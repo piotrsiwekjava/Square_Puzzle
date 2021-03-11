@@ -15,7 +15,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -476,10 +475,12 @@ public class NewGameMenu extends javax.swing.JFrame {
     }
     private void add_ImageToYourOwnList (String imgPath) {
         ImagesCopier imagec = new ImagesCopier(path_folderForImages);
-        imagec.copyImage(imgPath);
-        MyRAW.writeNewRekord(imgPath);
-        chooseImagePanel.refresh();
-        JOptionPane.showMessageDialog(this,"You added a picture succesfully");
+        String newPath = imagec.copyImageAndGiveNewPath(imgPath);
+        if (!newPath.equals("error")) {
+            MyRAW.writeNewRekord(newPath);
+            chooseImagePanel.refresh();
+            JOptionPane.showMessageDialog(this, "You added a picture succesfully");
+        }
     }
     public void setPath_ofChosenImage(String path){
         this.path_ofChosenImage=path;
